@@ -29,7 +29,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public LoginResponse login(LoginRequest loginRequest) {
         HttpEntity<LoginRequest> loginRequestHttpEntity = new HttpEntity<>(loginRequest);
         LoginResponse loginResponse = new LoginResponse();
-
         try {
             ResponseEntity<LoginResponse> loginResponseResponseEntity = this.sslRestTemplate
                     .exchange(
