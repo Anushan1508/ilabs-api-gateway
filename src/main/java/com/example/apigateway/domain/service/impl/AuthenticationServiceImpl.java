@@ -27,6 +27,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
+        System.out.println("loginRequest From AuthService|API GATEWAY = " + loginRequest);
         HttpEntity<LoginRequest> loginRequestHttpEntity = new HttpEntity<>(loginRequest);
         LoginResponse loginResponse = new LoginResponse();
         try {
@@ -39,14 +40,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                     );
             if (Objects.nonNull(loginResponseResponseEntity.getBody())) {
                 loginResponse = loginResponseResponseEntity.getBody();
-                if (loginResponse != null) {
-                    loginResponse.setResponseId(loginRequest.getRequest_id());
-                }
             }
             return loginResponse;
         } catch (Exception e) {
             e.printStackTrace();
         }
+        loginResponse.setResponseId(loginRequest.getRequestId());
         return loginResponse;
     }
 }

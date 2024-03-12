@@ -15,6 +15,7 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest) {
+        System.out.println("loginRequest From Controller|ApiGateway = " + loginRequest);
         return authenticationService.login(loginRequest);
     }
 
