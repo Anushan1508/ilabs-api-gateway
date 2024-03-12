@@ -1,4 +1,4 @@
-package com.example.apigateway.domain.dto.addItem;
+package com.example.apigateway.domain.dto.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthResponse {
+public class AuthRequest {
     private String responseId;
-    private String resultCode;
-    private String resultDesc;
+    private String token;
 }
