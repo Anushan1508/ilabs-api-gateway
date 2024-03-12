@@ -16,9 +16,4 @@ public class ItemController {
     public AddItemResponse addItem(@RequestBody AddItemRequest addItemRequest) {
         return itemService.addItem(addItemRequest);
     }
-
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello CartController";
-    }
 }

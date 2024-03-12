@@ -2,6 +2,7 @@ package com.example.apigateway.domain.service.impl;
 
 import com.example.apigateway.domain.dto.addItem.AddItemRequest;
 import com.example.apigateway.domain.dto.addItem.AddItemResponse;
+import com.example.apigateway.domain.dto.addItem.AddItemToItemServiceRequest;
 import com.example.apigateway.domain.dto.auth.AuthRequest;
 import com.example.apigateway.domain.dto.auth.AuthResponse;
 import com.example.apigateway.domain.service.ItemService;
@@ -32,13 +33,18 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public AddItemResponse addItem(AddItemRequest addItemRequest) {
-        HttpEntity<AddItemRequest> addItemRequestHttpEntity = new HttpEntity<>(addItemRequest);
+//        HttpEntity<AddItemRequest> addItemRequestHttpEntity = new HttpEntity<>(addItemRequest);
         AddItemResponse addItemResponse = new AddItemResponse();
         AuthRequest authRequest = new AuthRequest(
                 addItemRequest.getRequestId(),
                 addItemRequest.getToken()
         );
+        AddItemToItemServiceRequest addItemToItemServiceRequest = new AddItemToItemServiceRequest(
+                addItemRequest.getRequestId(),
+                addItemRequest.getItem_name()
+        );
         HttpEntity<AuthRequest> authRequestHttpEntity = new HttpEntity<>(authRequest);
+        HttpEntity<AddItemToItemServiceRequest> addItemToItemServiceRequestHttpEntity = new HttpEntity<>(addItemToItemServiceRequest);
         try {
             ResponseEntity<AuthResponse> authResponseResponseEntity = this.sslRestTemplate
                     .exchange(
@@ -54,7 +60,7 @@ public class ItemServiceImpl implements ItemService {
                             .exchange(
                                     addItemUrl,
                                     HttpMethod.POST,
-                                    addItemRequestHttpEntity,
+                                    addItemToItemServiceRequestHttpEntity,
                                     AddItemResponse.class
                             );
                     if (Objects.nonNull(addItemResponseResponseEntity.getBody())){
