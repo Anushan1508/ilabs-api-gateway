@@ -27,7 +27,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public LoginResponse login(LoginRequest loginRequest) {
-        System.out.println("loginRequest From AuthService|API GATEWAY = " + loginRequest);
         HttpEntity<LoginRequest> loginRequestHttpEntity = new HttpEntity<>(loginRequest);
         LoginResponse loginResponse = new LoginResponse();
         try {
