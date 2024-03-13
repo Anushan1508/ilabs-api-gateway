@@ -71,7 +71,8 @@ public class ItemServiceImpl implements ItemService {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            addItemResponse.setResultCode("401");
+            addItemResponse.setResultDesc("Exception occurred while adding item");
         }
         return addItemResponse;
     }
