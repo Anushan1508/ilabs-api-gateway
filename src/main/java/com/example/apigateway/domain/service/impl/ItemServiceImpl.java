@@ -33,7 +33,6 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public AddItemResponse addItem(AddItemRequest addItemRequest) {
-//        HttpEntity<AddItemRequest> addItemRequestHttpEntity = new HttpEntity<>(addItemRequest);
         AddItemResponse addItemResponse = new AddItemResponse();
         AuthRequest authRequest = new AuthRequest(
                 addItemRequest.getRequestId(),
@@ -54,7 +53,6 @@ public class ItemServiceImpl implements ItemService {
                             AuthResponse.class
                     );
             if (Objects.nonNull(authResponseResponseEntity.getBody())){
-                System.out.println(authResponseResponseEntity.getBody().getResultDesc());
                 if (authResponseResponseEntity.getBody().getResultCode().equals("200")){
                     ResponseEntity<AddItemResponse> addItemResponseResponseEntity = this.sslRestTemplate
                             .exchange(
