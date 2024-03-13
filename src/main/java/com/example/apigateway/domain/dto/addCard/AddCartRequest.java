@@ -10,5 +10,6 @@ import lombok.NoArgsConstructor;
 public class AddCartRequest {
     private String requestId;
     private String item;
+    private String token;
 
 }
