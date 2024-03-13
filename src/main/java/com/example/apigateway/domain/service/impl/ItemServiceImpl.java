@@ -25,7 +25,7 @@ public class ItemServiceImpl implements ItemService {
     private String authAdminUrl;
 
     @Autowired
-    public ItemServiceImpl(RestTemplate sslRestTemplate, @Value("${authAdmin.Url}") String addItemUrl, @Value("${auth.Url}") String authAdminUrl){
+    public ItemServiceImpl(RestTemplate sslRestTemplate, @Value("${authAdmin.Url}") String addItemUrl, @Value("${authAdmin.Url}") String authAdminUrl){
         this.sslRestTemplate = sslRestTemplate;
         this.addItemUrl = addItemUrl;
         this.authAdminUrl = authAdminUrl;
