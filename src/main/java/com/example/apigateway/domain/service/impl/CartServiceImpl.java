@@ -70,7 +70,6 @@ public class CartServiceImpl implements CartService {
             } else {
                 addCartResponse.setResultCode("401");
                 addCartResponse.setResultDesc("Unauthorized User");
-                return addCartResponse;
             }
         } catch (Exception e) {
             e.printStackTrace();

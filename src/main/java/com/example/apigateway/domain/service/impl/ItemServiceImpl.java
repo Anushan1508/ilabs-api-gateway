@@ -34,6 +34,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public AddItemResponse addItem(AddItemRequest addItemRequest) {
         AddItemResponse addItemResponse = new AddItemResponse();
+        addItemResponse.setResponseId(addItemRequest.getRequestId());
         AuthRequest authRequest = new AuthRequest(
                 addItemRequest.getRequestId(),
                 addItemRequest.getToken()
@@ -72,7 +73,6 @@ public class ItemServiceImpl implements ItemService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        addItemResponse.setResponseId(addItemRequest.getRequestId());
         return addItemResponse;
     }
 }
