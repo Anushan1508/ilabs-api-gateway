@@ -21,14 +21,14 @@ public class ItemServiceImpl implements ItemService {
     private final RestTemplate sslRestTemplate;
     @Value("${addItem.Url}")
     private String addItemUrl;
-    @Value("${auth.Url}")
-    private String authUrl;
+    @Value("${authAdmin.Url}")
+    private String authAdminUrl;
 
     @Autowired
-    public ItemServiceImpl(RestTemplate sslRestTemplate, @Value("${addItem.Url}") String addItemUrl, @Value("${auth.Url}") String authUrl){
+    public ItemServiceImpl(RestTemplate sslRestTemplate, @Value("${authAdmin.Url}") String addItemUrl, @Value("${auth.Url}") String authAdminUrl){
         this.sslRestTemplate = sslRestTemplate;
         this.addItemUrl = addItemUrl;
-        this.authUrl = authUrl;
+        this.authAdminUrl = authAdminUrl;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class ItemServiceImpl implements ItemService {
         try {
             ResponseEntity<AuthResponse> authResponseResponseEntity = this.sslRestTemplate
                     .exchange(
-                            authUrl,
+                            authAdminUrl,
                             HttpMethod.POST,
                             authRequestHttpEntity,
                             AuthResponse.class
