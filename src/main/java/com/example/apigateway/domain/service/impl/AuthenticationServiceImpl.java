@@ -29,6 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public LoginResponse login(LoginRequest loginRequest) {
         HttpEntity<LoginRequest> loginRequestHttpEntity = new HttpEntity<>(loginRequest);
         LoginResponse loginResponse = new LoginResponse();
+        loginResponse.setResponseId(loginRequest.getRequestId());
         try {
             ResponseEntity<LoginResponse> loginResponseResponseEntity = this.sslRestTemplate
                     .exchange(
@@ -37,14 +38,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                             loginRequestHttpEntity,
                             LoginResponse.class
                     );
-            if (Objects.nonNull(loginResponseResponseEntity.getBody())) {
-                loginResponse = loginResponseResponseEntity.getBody();
+            if (Objects.nonNull(loginResponseResponseEntity.getBody()) && loginResponseResponseEntity.getBody().getResultCode().equals("200")) {
+                loginResponse.setToken(loginResponseResponseEntity.getBody().getToken());
+                loginResponse.setResultCode("200");
+                loginResponse.setResultDesc("Login Success");
+            } else {
+                loginResponse.setResultCode("401");
+                loginResponse.setResultDesc("Login Failed");
             }
             return loginResponse;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        loginResponse.setResponseId(loginRequest.getRequestId());
         return loginResponse;
     }
 }
