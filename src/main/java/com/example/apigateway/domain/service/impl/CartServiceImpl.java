@@ -60,19 +60,16 @@ public class CartServiceImpl implements CartService {
                                 addCartRequestHttpEntity,
                                 AddCartResponse.class
                         );
-                if (Objects.nonNull(addCartResponseResponseEntity.getBody()) && addCartResponseResponseEntity.getBody().getResultCode().equals("200")) {
-                    addCartResponse.setResultCode("200");
-                    addCartResponse.setResultDesc("Added to Cart Successfully");
-                } else {
-                    addCartResponse.setResultCode("400");
-                    addCartResponse.setResultDesc("Failed to add to Cart");
+                if (Objects.nonNull(addCartResponseResponseEntity.getBody())) {
+                    addCartResponse = addCartResponseResponseEntity.getBody();
                 }
             } else {
                 addCartResponse.setResultCode("401");
                 addCartResponse.setResultDesc("Unauthorized User");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            addCartResponse.setResultCode("402");
+            addCartResponse.setResultDesc("Exception occurred while adding to Cart");
         }
         return addCartResponse;
     }
@@ -104,19 +101,16 @@ public class CartServiceImpl implements CartService {
                                 removeCartRequestHttpEntity,
                                 RemoveCartResponse.class
                         );
-                if (Objects.nonNull(removeCartResponseResponseEntity.getBody()) && removeCartResponseResponseEntity.getBody().getResultCode().equals("200")) {
-                    removeCartResponse.setResultCode("200");
-                    removeCartResponse.setResultDesc("Removed to Cart Successfully");
-                } else {
-                    removeCartResponse.setResultCode("400");
-                    removeCartResponse.setResultDesc("Failed to remove to Cart");
+                if (Objects.nonNull(removeCartResponseResponseEntity.getBody())) {
+                    removeCartResponse = removeCartResponseResponseEntity.getBody();
                 }
             } else {
                 removeCartResponse.setResultCode("401");
                 removeCartResponse.setResultDesc("Unauthorized User");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            removeCartResponse.setResultCode("402");
+            removeCartResponse.setResultDesc("Exception occurred while removing from Cart");
         }
         return removeCartResponse;
     }
