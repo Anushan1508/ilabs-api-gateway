@@ -67,7 +67,7 @@ public class ItemServiceImpl implements ItemService {
                     }
                 } else {
                     addItemResponse.setResultDesc("Authentication Failed");
-                    addItemResponse.setResultCode("01");
+                    addItemResponse.setResultCode("402");
                 }
             }
         } catch (Exception e) {
